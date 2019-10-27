@@ -1,16 +1,16 @@
 const router = require('express').Router();
-let User = require('../models/blog.model');
+let Blog = require('../models/blog.model');
 
-router.get('/', (req, res) => {
-	User.find()
-	.then(users => res.json(users))
-	.catch(err => res.status(400));
-});
-
-router.post('/add', (req, res) => {
-	User.create(req.body)
+router.route('/').post((req, res) => {
+	Blog.find()
 	.then(() => res.json("user added"))
 	.catch(err => res.status(400));
-});
+})
+
+router.route('/add').post((req, res) => {
+	Blog.create(req.body)
+	.then(() => res.json("user added"))
+	.catch(err => res.status(400));
+})
 
 module.exports = router;

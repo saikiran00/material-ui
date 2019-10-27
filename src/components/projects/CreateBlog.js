@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from '../../axios.js';
+import axios from 'axios';
 
 export default class CreateBlog extends Component{
 	state={
@@ -15,7 +15,7 @@ export default class CreateBlog extends Component{
 	handleSubmit = (e) => {
 		e.preventDefault();
 		const payload = this.state;
-		axios.post('blogs/add', payload)
+		axios.post('http://localhost:4000/blogs/add', payload)
 		.then(res => {
 			console.log(res.data);
 		})
