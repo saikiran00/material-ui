@@ -1,7 +1,8 @@
 import React, {Component} from  'react'
-import { Link } from "react-router-dom";
+import axios from '../../axios.js';
+import { Link, useHistory } from "react-router-dom";
 
-export default class BlogList extends Component{
+class BlogList extends Component{
 	componentDidMount() {
 	  this.getAllBlogs();
 	}
@@ -9,20 +10,31 @@ export default class BlogList extends Component{
 		blogs:[]
 	}
 	getAllBlogs(){
-		fetch(`https://jsonplaceholder.typicode.com/users`)
+		axios.get('blogs')
+		.then(response => {
+			this.setState({
+				blogs: response.data,
+			})
+		})
 	}
+	EditBlog(){
+		history.push('/create');
+	}
+
 	renderTable(){
 		return this.state.blogs.map((blog) => {
-			const {title, slug, published} = blog
+			const {_id, title, status, description} = blog
 			return (
-				<tr>
+				<tr key={_id}>
 					<td>{title}</td>
-					<td>{slug}</td>
-					<td>{published}</td>
+					<td>{status}</td>
+					<td>{description}</td>
+					<td onClick={this.EditBlog}>Edit</td>
 				</tr>
 			)
 		})
 	}
+
 	render(){
 		return (
 			<div>
@@ -39,11 +51,12 @@ export default class BlogList extends Component{
 						</tr>
 					</thead>
 					<tbody>
-					{this.renderTable()}
-						
+						{this.renderTable()}
 					</tbody>
 				</table>
 			</div>
 		)
 	}
 }
+
+export default BlogList;
