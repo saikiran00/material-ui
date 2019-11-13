@@ -3,7 +3,7 @@ import {BrowserRouter, Route } from "react-router-dom";
 import Navbar from './components/layout/Navbar';
 import BlogList from './components/projects/BlogList';
 import CreateBlog from './components/projects/CreateBlog';
-// import EditBlog from './components/projects/EditBlog';
+import EditBlog from './components/projects/EditBlog';
 
 class App extends Component {
 
@@ -15,6 +15,7 @@ class App extends Component {
 		    		<Navbar />
 		    		<Route exact path="/" component={BlogList} />
 		    		<Route path="/create" component={CreateBlog} />
+		    		<Route path="/edit/:id" component={EditBlog} />
 		    	</div>
 		    </BrowserRouter>
 	    </div>

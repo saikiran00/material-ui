@@ -1,6 +1,6 @@
 import React, {Component} from  'react'
 import axios from '../../axios.js';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class BlogList extends Component{
 	componentDidMount() {
@@ -17,8 +17,8 @@ class BlogList extends Component{
 			})
 		})
 	}
-	EditBlog(){
-		history.push('/create');
+	EditBlog = (title) => {
+		this.props.history.push('/edit/'+title);
 	}
 
 	renderTable(){
@@ -29,7 +29,7 @@ class BlogList extends Component{
 					<td>{title}</td>
 					<td>{status}</td>
 					<td>{description}</td>
-					<td onClick={this.EditBlog}>Edit</td>
+					<td onClick={() => this.EditBlog(title)}>Edit</td>
 				</tr>
 			)
 		})
